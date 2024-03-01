@@ -1,4 +1,4 @@
-package com.navr.learn.java8.stream;
+package com.navr.learn.java8;
 
 import java.util.*;
 import java.util.stream.Collectors;

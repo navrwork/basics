@@ -1,4 +1,4 @@
-package com.navr.learn.java8.stream;
+package com.navr.learn.java8;
 
 import com.navr.learn.java8.common.Fruit;
 
