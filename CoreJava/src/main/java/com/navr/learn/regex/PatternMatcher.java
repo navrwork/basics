@@ -11,6 +11,9 @@ public class PatternMatcher {
         patternMatcher3();
         patternMatcher4();
         replaceWithPatternMatcher("hello friends. Let's  play  now.");
+
+        groupRegex();
+        groupBackreference();
     }
 
     private static void patternMatcher1() {
@@ -92,5 +95,58 @@ public class PatternMatcher {
         System.out.printf("%nreplaceWithPatternMatcher: inStr=%s, outStr=%s%n", inStr, outStr);
 
         return outStr;
+    }
+
+    /**
+     * This method fetches a number value, of any size, from the given string.
+     */
+    private static void groupRegex() {
+        String regex = "(D*)(\\d{1,})(.*)";
+        String s1 = "this is a test number: 1234567890.";
+        String s2 = "the secret code is 100200. keep it safe.";
+        String s3 = "1999 is my birth year";
+
+        System.out.printf("%ngroupRegex: %n");
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(s1);
+        if (m.find()) {
+            String group1 = m.group(1);
+            String group2 = m.group(2); // number value caught here
+            String group3 = m.group(3);
+            System.out.printf("s1=%s, group1=%s, group2=%s, group3=%s%n", s1, group1, group2, group3);
+        }
+
+        m = p.matcher(s2);
+        if (m.find()) {
+            String group1 = m.group(1);
+            String group2 = m.group(2); // number value caught here
+            String group3 = m.group(3);
+            System.out.printf("s2=%s, group1=%s, group2=%s, group3=%s%n", s2, group1, group2, group3);
+        }
+
+        m = p.matcher(s3);
+        if (m.find()) {
+            String group1 = m.group(1);
+            String group2 = m.group(2); // number value caught here
+            String group3 = m.group(3);
+            System.out.printf("s3=%s, group1=%s, group2=%s, group3=%s%n", s3, group1, group2, group3);
+        }
+    }
+
+    /**
+     * A backreference is specified in the regular expression as a backslash (\)
+     * followed by a digit indicating the number of the group to be recalled.
+     *
+     */
+    private static void groupBackreference() {
+        String regex = "(\\d\\d)\\1";
+        System.out.printf("%ngroupBackreference: %n");
+
+        String s1 = "1212";
+        String s2 = "1234";
+        boolean s1Matches = s1.matches(regex);
+        boolean s2Matches = s2.matches(regex);
+        System.out.printf("s1=%s, s1Matches=%b%n", s1, s1Matches);
+        System.out.printf("s2=%s, s2Matches=%b%n", s2, s2Matches);
     }
 }

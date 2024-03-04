@@ -3,7 +3,9 @@ package com.navr.learn.regex;
 
 /**
  *
- * Ref: https://www.vogella.com/tutorials/JavaRegularExpressions/article.html#common-matching-symbols
+ * Ref:
+ *  https://www.vogella.com/tutorials/JavaRegularExpressions/article.html#common-matching-symbols
+ *  https://docs.oracle.com/javase/tutorial/essential/regex/
  *
  * <pre>
  * RegEx	Description
