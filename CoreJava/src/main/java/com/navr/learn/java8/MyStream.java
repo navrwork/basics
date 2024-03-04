@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 
 public class MyStream {
     public static void main(String[] args) {
-//        streamInt();
+//        mapToInt();
 
         List<String> strList = Arrays.asList("abc", "hello", "xyz", "piano");
-        groupListByLength(strList);
+        groupingBy(strList);
     }
 
-    private static void streamInt() {
+    private static void mapToInt() {
         List<Integer> numList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
 
         long allSum1 = numList.stream().mapToInt(Integer::intValue).sum();
@@ -34,8 +34,9 @@ public class MyStream {
     // group list of string values by their length
     // 3, ["abc", "xyz"]
     // 5, ["hello", "piano"]
-    private static void groupListByLength(List<String> strList) {
-        Map<Integer, List<String>> strGroupList = strList.stream().collect(Collectors.groupingBy(String::length));
+    private static void groupingBy(List<String> strList) {
+        Map<Integer, List<String>> strGroupList = strList.stream()
+                .collect(Collectors.groupingBy(String::length));
         System.out.printf("strGroupList=%s%n", strGroupList);
     }
 }

@@ -86,6 +86,7 @@ public class StreamMain {
         System.out.printf("newFruitList=%s%n", newFruitList);
 
     }
+
     private static void streamsReduce() {
 
     }
