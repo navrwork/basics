@@ -1,14 +1,25 @@
 package com.navr.learn.java8;
 
 import com.navr.learn.java8.common.Fruit;
+import com.navr.learn.java8.common.Person;
+import com.navr.learn.java8.common.PersonHelper;
 
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class StreamMain {
+public class CollectorsGroupingBy {
     public static void main(String[] args) {
+//        groupingBy_1();
+
+        groupingBy_2();
+
+    }
+
+    private static void groupingBy_1() {
+
         List<Fruit> listOfFruits = Arrays.asList(
                 new Fruit("Apple", 1),
                 new Fruit("Apple", 3),
@@ -16,14 +27,7 @@ public class StreamMain {
                 new Fruit("Banana", 2),
                 new Fruit("Banana", 5),
                 new Fruit("Pear", 0),
-                new Fruit("Orange", 4)
-        );
-
-        //streamsGroupingBy(listOfFruits);
-        streamsMap(listOfFruits);
-    }
-
-    private static void streamsGroupingBy(List<Fruit> listOfFruits) {
+                new Fruit("Orange", 4));
 
         // grouping of objects by one field
         Map<String, List<Fruit>> fruitGroupByOneField = listOfFruits.stream()
@@ -79,16 +83,23 @@ public class StreamMain {
         System.out.printf("fruitFilterGroupAndObj=%s%n", fruitFilterGroupAndObj);
     }
 
-    private static void streamsMap(List<Fruit> listOfFruits) {
+    private static void groupingBy_2() {
+        List<Person> personList = PersonHelper.getPersonList();
 
-        List<Fruit> newFruitList = listOfFruits.stream().map(p->{p.setAmount(p.getAmount()*2); return p;})
-                .collect(Collectors.toList());
-        System.out.printf("newFruitList=%s%n", newFruitList);
+        // Get count of number of persons in each city
+        Map<String, Long> personCountByCity = personList.stream()
+                .collect(Collectors.groupingBy(Person::getCity, Collectors.counting()));
+        System.out.printf("personCountByCity=%s%n", personCountByCity);
 
-    }
+        // Get average age of persons by city
+        Map<String, Double> personAvgAgeByCity = personList.stream()
+                .collect(Collectors.groupingBy(Person::getCity, Collectors.averagingInt(Person::getAge)));
+        System.out.printf("personAvgAgeByCity=%s%n", personAvgAgeByCity);
 
-    private static void streamsReduce() {
-
+        // Age stats grouped by city
+        Map<String, IntSummaryStatistics> personSummaryStatsByCity = personList.stream()
+                .collect(Collectors.groupingBy(Person::getCity, Collectors.summarizingInt(Person::getAge)));
+        System.out.printf("personSummaryStatsByCity=%s%n", personSummaryStatsByCity);
     }
 
 }
