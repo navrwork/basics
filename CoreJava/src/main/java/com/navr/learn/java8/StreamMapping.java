@@ -3,13 +3,12 @@ package com.navr.learn.java8;
 import com.navr.learn.java8.common.Person;
 import com.navr.learn.java8.common.PersonHelper;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CollectorsMapping {
+public class StreamMapping {
     public static void main(String[] args) {
         collectorsMapping();
     }
