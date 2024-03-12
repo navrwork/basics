@@ -67,7 +67,6 @@ public class StreamMap {
     /**
      * Reference: https://www.baeldung.com/java-collectors-tomap
      *
-     * @return
      */
     private static void listToMap() {
         List<Product> productList = Arrays.asList(
