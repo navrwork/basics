@@ -3,6 +3,7 @@ package com.navr.learn.java8;
 import com.navr.learn.java8.common.Fruit;
 import com.navr.learn.java8.common.Person;
 import com.navr.learn.java8.common.PersonHelper;
+import com.navr.learn.java8.common.Product;
 
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
@@ -14,7 +15,9 @@ public class StreamGroupingBy {
     public static void main(String[] args) {
 //        groupingBy_1();
 
-        groupingBy_2();
+//        groupingBy_2();
+
+        groupingBy_3();
 
     }
 
@@ -38,7 +41,7 @@ public class StreamGroupingBy {
         // grouping of objects by multiple fields
         Map<String, Map<Integer, List<Fruit>>> fruitGroupByTwoFields = listOfFruits.stream()
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.groupingBy(Fruit::getAmount))
-        );
+                );
         System.out.printf("fruitGroupByTwoFields=%s%n", fruitGroupByTwoFields);
 
 
@@ -49,8 +52,8 @@ public class StreamGroupingBy {
 
 
         // grouping and average
-       Map<String, Double> fruitGroupAndAvg = listOfFruits.stream()
-               .collect(Collectors.groupingBy(Fruit::getName, Collectors.averagingDouble(Fruit::getAmount)));
+        Map<String, Double> fruitGroupAndAvg = listOfFruits.stream()
+                .collect(Collectors.groupingBy(Fruit::getName, Collectors.averagingDouble(Fruit::getAmount)));
         System.out.printf("fruitGroupAndAvg=%s%n", fruitGroupAndAvg);
 
         // grouping and filtering
@@ -71,14 +74,14 @@ public class StreamGroupingBy {
 
         // grouping with filter. return count.
         Map<String, Long> fruitFilterGroupAndCount = listOfFruits.stream()
-                .filter(fruit -> fruit.getAmount()>1 && fruit.getAmount()<5)
+                .filter(fruit -> fruit.getAmount() > 1 && fruit.getAmount() < 5)
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.counting()));
         System.out.printf("fruitFilterGroupAndCount=%s%n", fruitFilterGroupAndCount);
 
 
         // grouping with filter. return obj list.
         Map<String, List<Fruit>> fruitFilterGroupAndObj = listOfFruits.stream()
-                .filter(fruit -> fruit.getAmount()>1 && fruit.getAmount()<5)
+                .filter(fruit -> fruit.getAmount() > 1 && fruit.getAmount() < 5)
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.toList()));
         System.out.printf("fruitFilterGroupAndObj=%s%n", fruitFilterGroupAndObj);
     }
@@ -100,6 +103,23 @@ public class StreamGroupingBy {
         Map<String, IntSummaryStatistics> personSummaryStatsByCity = personList.stream()
                 .collect(Collectors.groupingBy(Person::getCity, Collectors.summarizingInt(Person::getAge)));
         System.out.printf("personSummaryStatsByCity=%s%n", personSummaryStatsByCity);
+    }
+
+    /**
+     * groupingBy with productId (PK) as Map key and object as value.
+     */
+    private static void groupingBy_3() {
+        List<Product> productList = Arrays.asList(
+                new Product(1001L, "Google", "Pixel 8", 90000),
+                new Product(1002L, "Google", "Pixel 8 Pro", 150000),
+                new Product(1003L, "Google", "Chromecast", 10000)
+        );
+
+        Map<Long, List<Product>> productMap = productList.stream()
+                .collect(Collectors.groupingBy(Product::getProductId));
+
+        System.out.printf("productMap=%s%n", productMap);
+
     }
 
 }
