@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 public class StreamGroupingBy {
     public static void main(String[] args) {
-//        groupingBy_1();
+        groupingBy_1();
 
-//        groupingBy_2();
+        groupingBy_2();
 
         groupingBy_3();
 
