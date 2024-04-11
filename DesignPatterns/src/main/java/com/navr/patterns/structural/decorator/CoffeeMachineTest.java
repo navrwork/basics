@@ -8,5 +8,6 @@ public class CoffeeMachineTest {
 
         enhancedCoffeeMachine.makeSmallCoffee();
         enhancedCoffeeMachine.makeLargeCoffee();
+        enhancedCoffeeMachine.makeMasalaCoffee();
     }
 }

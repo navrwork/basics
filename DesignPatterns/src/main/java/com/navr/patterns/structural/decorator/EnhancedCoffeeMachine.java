@@ -20,4 +20,9 @@ public class EnhancedCoffeeMachine implements CoffeeMachine {
         normalCoffeeMachine.makeLargeCoffee();
         System.out.println("EnhancedCoffeeMachine: makeLargeCoffee .. unaltered.");
     }
+
+    // Extended behaviour
+    public void makeMasalaCoffee() {
+        System.out.println("EnhancedCoffeeMachine: makeMasalaCoffee .. Extended behaviour.");
+    }
 }
