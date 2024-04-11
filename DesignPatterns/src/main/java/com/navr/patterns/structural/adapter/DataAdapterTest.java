@@ -1,5 +1,11 @@
 package com.navr.patterns.structural.adapter;
 
+/**
+ * Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate.
+ *
+ * <br/>
+ * Reference: <a href="https://refactoring.guru/design-patterns/adapter">Adapter pattern</a>
+ */
 public class DataAdapterTest {
 
     public static void main(String[] args) {
