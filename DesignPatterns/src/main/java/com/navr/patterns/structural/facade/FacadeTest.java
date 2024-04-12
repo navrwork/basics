@@ -1,5 +1,7 @@
 package com.navr.patterns.structural.facade;
 
+import java.io.File;
+
 /**
  * Facade is a structural design pattern that provides a simplified interface to
  * a library, a framework, or any other complex set of classes.
@@ -13,6 +15,6 @@ public class FacadeTest {
 
     public static void main(String[] args) {
         VideoConverter videoConverter = new VideoConverter();
-        videoConverter.convertVideo("funny-cat-video.ogg", "mp4");
+        File newFile = videoConverter.convertVideo("funny-cat-video.ogg", "mp4");
     }
 }
