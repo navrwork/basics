@@ -6,7 +6,7 @@ package com.navr.patterns.behavioral.observer;
  * <br/><br/>
  * Reference: <a href="https://refactoring.guru/design-patterns/observer">Observer pattern</a>
  */
-public class Client {
+public class ObserverClient {
     public static void main(String[] args) {
         Subscriber1 subscriber1 = new Subscriber1();
         Subscriber2 subscriber2 = new Subscriber2();
