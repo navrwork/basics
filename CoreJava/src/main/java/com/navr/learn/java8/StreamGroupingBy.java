@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 public class StreamGroupingBy {
     public static void main(String[] args) {
@@ -35,8 +38,7 @@ public class StreamGroupingBy {
         // grouping of objects by one field
         Map<String, List<Fruit>> fruitGroupByOneField = listOfFruits.stream()
                 .collect(Collectors.groupingBy(Fruit::getName));
-        System.out.printf("fruitGroupByOneField=%s%n", fruitGroupByOneField);
-
+        System.out.printf("%nfruitGroupByOneField=%s%n", fruitGroupByOneField);
 
         // grouping of objects by multiple fields
         Map<String, Map<Integer, List<Fruit>>> fruitGroupByTwoFields = listOfFruits.stream()
@@ -44,24 +46,21 @@ public class StreamGroupingBy {
                 );
         System.out.printf("fruitGroupByTwoFields=%s%n", fruitGroupByTwoFields);
 
+        // grouping and reduction
+        Map<String, Set<Integer>> fruitGroupByAndReduce = listOfFruits.stream()
+                .collect(Collectors.groupingBy(Fruit::getName, Collectors.mapping(Fruit::getAmount, toSet()))
+                );
+        System.out.printf("fruitGroupByAndReduce=%s%n", fruitGroupByAndReduce);
 
         // grouping and count
         Map<String, Long> fruitGroupAndCount = listOfFruits.stream()
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.counting()));
         System.out.printf("fruitGroupAndCount=%s%n", fruitGroupAndCount);
 
-
         // grouping and average
         Map<String, Double> fruitGroupAndAvg = listOfFruits.stream()
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.averagingDouble(Fruit::getAmount)));
         System.out.printf("fruitGroupAndAvg=%s%n", fruitGroupAndAvg);
-
-        // grouping and filtering
-//        Map<String, Integer> fruitGroupFilterAndCount = listOfFruits.stream()
-//                .collect(Collectors.groupingBy(
-//                        Fruit::getName,
-//                        Collectors.filtering(fruit -> fruit.getName().startsWith("A") || fruit.getName().startsWith("B")), Collectors.toList());
-
 
         // group list of string values by their length
         // 3, ["abc", "xyz"]
@@ -71,6 +70,11 @@ public class StreamGroupingBy {
                 .collect(Collectors.groupingBy(String::length));
         System.out.printf("strGroupList=%s%n", strGroupList);
 
+        // filter and group
+        Map<String, List<Fruit>> fruitFilterAndGroup = listOfFruits.stream()
+                .filter(fruit -> fruit.getName().startsWith("A")||fruit.getName().startsWith("B"))
+                .collect(Collectors.groupingBy(Fruit::getName));
+        System.out.printf("fruitFilterAndGroup=%s%n", fruitFilterAndGroup);
 
         // grouping with filter. return count.
         Map<String, Long> fruitFilterGroupAndCount = listOfFruits.stream()
@@ -78,12 +82,13 @@ public class StreamGroupingBy {
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.counting()));
         System.out.printf("fruitFilterGroupAndCount=%s%n", fruitFilterGroupAndCount);
 
-
         // grouping with filter. return obj list.
         Map<String, List<Fruit>> fruitFilterGroupAndObj = listOfFruits.stream()
                 .filter(fruit -> fruit.getAmount() > 1 && fruit.getAmount() < 5)
                 .collect(Collectors.groupingBy(Fruit::getName, Collectors.toList()));
         System.out.printf("fruitFilterGroupAndObj=%s%n", fruitFilterGroupAndObj);
+
+        System.out.printf("%n%n");
     }
 
     private static void groupingBy_2() {
@@ -103,6 +108,8 @@ public class StreamGroupingBy {
         Map<String, IntSummaryStatistics> personSummaryStatsByCity = personList.stream()
                 .collect(Collectors.groupingBy(Person::getCity, Collectors.summarizingInt(Person::getAge)));
         System.out.printf("personSummaryStatsByCity=%s%n", personSummaryStatsByCity);
+
+        System.out.printf("%n%n");
     }
 
     /**
