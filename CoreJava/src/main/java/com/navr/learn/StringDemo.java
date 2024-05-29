@@ -1,4 +1,4 @@
-package com.navr.learn.java;
+package com.navr.learn;
 
 public class StringDemo {
 
