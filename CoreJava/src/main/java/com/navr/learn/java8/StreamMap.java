@@ -14,11 +14,19 @@ import java.util.stream.Stream;
 
 public class StreamMap {
     public static void main(String[] args) {
+        mapExample();
         streamMap();
-
         listToMap();
     }
 
+    private static void mapExample() {
+        int[] num = {1, 2, 3};
+        int squareSum = Arrays.stream(num)
+                .map(n -> n * n)
+                .sum();
+        System.out.printf("%nmapExample squareSum=%d%n", squareSum);
+
+    }
 
     private static void streamMap() {
         List<Person> personList = PersonHelper.getPersonList();
@@ -27,7 +35,7 @@ public class StreamMap {
         List<String> lastNamesList = personList.stream()
                 .map(Person::getLastName)
                 .collect(Collectors.toList());
-        System.out.printf("lastNamesList=%s%n", lastNamesList);
+        System.out.printf("%nlastNamesList=%s%n", lastNamesList);
 
         // map and collect
         Set<String> citySet = personList.stream()
@@ -66,7 +74,6 @@ public class StreamMap {
 
     /**
      * Reference: https://www.baeldung.com/java-collectors-tomap
-     *
      */
     private static void listToMap() {
         List<Product> productList = Arrays.asList(
