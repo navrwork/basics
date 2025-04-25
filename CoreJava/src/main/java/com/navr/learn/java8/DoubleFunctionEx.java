@@ -1,6 +1,6 @@
 package com.navr.learn.java8;
 
-public class DoubleFunctionTest {
+public class DoubleFunctionEx {
     public static void main(String[] args) {
         testDoubleFunction();
     }
