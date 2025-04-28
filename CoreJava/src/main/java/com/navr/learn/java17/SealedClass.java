@@ -27,6 +27,13 @@ class MySquare extends Square {
     // Another class that extends non-sealed subclass, without any restriction
 }
 
+//
+// Compilation error: 'SomeRandomClass' is not allowed in the sealed hierarchy
+//
+//class SomeRandomClass extends Shape {
+//
+//}
+
 /**
  * <pre>
  * When defining subclasses for a sealed class in Java, each subclass must explicitly declare how it will continue the sealing initiated by its superclass. This is done using one of three modifiers: final, sealed, or non-sealed.
