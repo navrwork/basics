@@ -58,4 +58,51 @@ public class GenericsSuper {
         intList.add(111);
         intList.add(222);
     }
+
+    private static void checkAnimalDogPuppy() {
+        List<Object> objList = new ArrayList<>();
+        List<Animal> animalList = new ArrayList<>();
+        List<Dog> dogList = new ArrayList<>();
+        List<Puppy> puppyList = new ArrayList<>();
+        addDogToList(objList); // Ok. List<Object> is supertype of Dog.
+        addDogToList(animalList); // Ok. List<Animal> is supertype of Dog.
+        addDogToList(dogList); // Ok. List<Dog> is same type as Dog.
+        //
+        // The wildcard `<? super Dog>` ensures that the list can safely accept `Dog` or its subclasses (`Puppy`).
+        // However, `List<Puppy>` is a subtype of `List<Dog>` and **not a supertype of `Dog`**, so it doesn't satisfy the `? super Dog` constraint.
+        // You cannot pass `List<Puppy>` where `List<? super Dog>` is expected because it violates the "supertype" requirement.
+        //
+//        addDogToList(puppyList); // Not Ok.
+    }
+
+    /**
+     * Key Rules: <br/>
+     * 1. Generics Invariance: `List&lt;Animal&gt;`, `List&lt;Dog&gt;`, and `List&lt;Puppy&gt;` are treated as distinct types,
+     * even if they belong to the same inheritance hierarchy. <br/>
+     * 2. Wildcard Rules: The `? super Dog` wildcard allows passing `List&lt;Dog&gt;` or any list of supertypes
+     * (like `List&lt;Animal&gt;` or `List&lt;Object&gt;`), but not subtypes like `List&lt;Puppy&gt;`.
+     */
+    public static void addDogToList(List<? super Dog> list) {
+        //
+        // Compilation error: 'add(capture<? super com.navr.learn.java5.Dog>)' in 'java.util.List' cannot be applied to '(com.navr.learn.java5.Animal)'
+        //
+//        list.add(new Animal());
+
+        // Adding a Dog instance
+        list.add(new Dog());
+
+        // Adding a Puppy instance (Puppy is a subclass of Dog)
+        list.add(new Puppy());
+    }
+
+}
+
+
+class Animal {
+}
+
+class Dog extends Animal {
+}
+
+class Puppy extends Dog {
 }
